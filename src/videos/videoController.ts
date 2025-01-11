@@ -91,10 +91,19 @@ const videoController = {
 
 
         if (video) {
-            video.title = req.body.title;
-            video.author = req.body.author;
-            video.availableResolutions = req.body.availableResolutions;
-            video.canBeDownloaded = req.body.canBeDownloaded;
+            if (req.body.title) {
+                video.title = req.body.title;
+            }
+            if(req.body.author) {
+                video.author = req.body.author;
+            }
+            if (req.body.availableResolutions) {
+            video.availableResolutions = req.body.availableResolutions;}
+            if (req.body.canBeDownloaded) {
+            video.canBeDownloaded = req.body.canBeDownloaded;}
+            if(req.body.minAgeRestriction) {
+                video.minAgeRestriction = req.body.minAgeRestriction
+            }
             res.send(204)
         } else {
             res.send(400)
