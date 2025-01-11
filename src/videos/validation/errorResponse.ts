@@ -1,3 +1,3 @@
-export function errorResponse(errorsArray: any) {
-    return { errors: errorsArray };
+export function errorResponse (errorsArray: Array<{ message: string; field: string }>) {
+    return { "errorsMessages": errorsArray };
 }

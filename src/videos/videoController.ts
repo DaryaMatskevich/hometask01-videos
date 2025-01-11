@@ -26,7 +26,7 @@ const videoController = {
         const title = req.body.title;
         const availableResolutions = req.body.availableResolutions
 
-        const errorsArray: Array<{ field: string; message: string }> = []
+        const errorsArray: Array<{ message: string; field: string }> = []
         titleFieldValidator(title, errorsArray)
         availableResolutionsFieldValidator(availableResolutions, errorsArray)
         authorFieldValidator(author, errorsArray)
@@ -41,7 +41,9 @@ const videoController = {
         const createdAt = new Date()
         const day = 60 * 60 * 24 * 1000;
         const newVideo = {
-            ...req.body,
+            author,
+            title,
+            availableResolutions,
             id: Date.now() + Math.random(),
             canBeDownloaded: true,
             minAgeRestriction: null,
