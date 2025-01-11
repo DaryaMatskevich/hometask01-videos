@@ -45,7 +45,7 @@ const videoController = {
             title,
             availableResolutions,
             id: Date.now() + Math.random(),
-            canBeDownloaded: true,
+            canBeDownloaded: false,
             minAgeRestriction: null,
             createdAt: createdAt.toISOString(),
             publicationDate: new Date(createdAt.getTime() + day).toISOString(),
