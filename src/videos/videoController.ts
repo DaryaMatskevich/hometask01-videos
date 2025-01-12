@@ -94,10 +94,10 @@ const videoController = {
         if (video) {
                 video.id = id,
                 video.title = title,
-                video.author = author
+                video.author = author,
                 video.availableResolutions = availableResolutions,
-                video.canBeDownloaded = canBeDownloaded || undefined,
-                video.minAgeRestriction =  minAgeRestriction || null,
+                video.canBeDownloaded = canBeDownloaded,
+                video.minAgeRestriction =  minAgeRestriction,
                 video.publicationDate = publicationDate;
                 res.status(204).send()
         } else  { 
