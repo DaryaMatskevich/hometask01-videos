@@ -60,10 +60,10 @@ const videoController = {
         const videoIndex = db.videos.findIndex(video => video.id === +id);
             if (videoIndex !== -1) {
                 db.videos.splice(videoIndex, 1)
-                res.status(204)
+                res.status(204).end()
             }
         else {
-        res.status(404)
+        res.status(404).end()
       }},
 
     changesVideo: (req: Request, res: Response) => {
