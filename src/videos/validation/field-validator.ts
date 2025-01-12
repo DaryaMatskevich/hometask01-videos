@@ -65,13 +65,13 @@ export const validateCanBeDoWnlouded = (
 }
 
 export const minAgeRestrictionValidator = (
-    minAgeRestriction: number | undefined | null,
+    minAgeRestriction: string | undefined | null,
     errorsArray: Array<{ message: string; field: string }>) => {
             if (minAgeRestriction === undefined) {
          errorsArray.push({ message: "minAgeRestriction is not defined", field: "minAgeRestriction" })
      }
-     if (typeof minAgeRestriction !== "number" || minAgeRestriction > 18) {
-        errorsArray.push({ message: "minAgeRestriction is not defined", field: "minAgeRestriction" })
+     if (typeof minAgeRestriction !== "number" || minAgeRestriction < 18) {
+        errorsArray.push({ message: "minAgeRestriction is wrong", field: "minAgeRestriction" })
     }
 }
 
@@ -80,4 +80,12 @@ export const publicationDateValidator = (
     errorsArray: Array<{ message: string; field: string }>) => {
           if (publicationDate === undefined) {
         errorsArray.push({ message: "publicationDate is not defined", field: "publicationDate" })
-}}
+}  else {
+    const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
+
+if (!dateRegex.test(publicationDate)) {
+    errorsArray.push({ message: "publicationDate should be in the format 'YYYY-MM-DDTHH:MM:SS.SSSZ'", field: "publicationDate" });
+}
+}
+};
+
