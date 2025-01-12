@@ -73,11 +73,11 @@ const videoController = {
         const author = req.body.author;
         const title = req.body.title;
         const availableResolutions = req.body.availableResolutions;
-        const canBeDownloaded = req.body.canBeDownloaded || null;
-        const minAgeRestriction = req.body.minAgeRestriction;
-        const publicationDate = req.body.publicationDate;
+        const canBeDownloaded = req.body.canBeDownloaded || false;
+        const minAgeRestriction = req.body.minAgeRestriction || 18;
+        const publicationDate = req.body.publicationDate || new Date().toISOString();
 
-        const errorsArray: Array<{ field: string; message: string }> = []
+        const errorsArray: Array<{ field: string; message: string }> = [] 
         titleFieldValidator(title, errorsArray)
         availableResolutionsFieldValidator(availableResolutions, errorsArray)
         authorFieldValidator(author, errorsArray)
