@@ -1,5 +1,5 @@
 type DBType = {
-    videos: any[]
+    videos: any []
     blogs: any[]
 }
 

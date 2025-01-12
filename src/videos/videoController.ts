@@ -56,16 +56,17 @@ const videoController = {
     },
 
     deleteVideoById: (req: Request, res: Response) => {
-        const id = +req.params.id;
-        const videoIndex = db.videos.findIndex(video => video.id === id);
-        if (videoIndex !== -1) {
-            db.videos.splice(videoIndex, 1)
-            res.status(204).send()
-        }
-        else {
-            res.status(404).send()
-        }
-    },
+        for (let i = 0; i < db.videos.length; i++) {
+            if (db.videos[i].id === +req.params.id) {
+              db.videos.splice(i, 1);
+              res.send(204)
+              return;
+            }
+          }
+          res.send(404)
+        },
+        
+        
 
     changesVideo: (req: Request, res: Response) => {
         const id = req.params.id;
