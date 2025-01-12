@@ -92,7 +92,7 @@ const videoController = {
         }
 
         if (video) {
-                video.id = id,
+                video.id = +id,
                 video.title = title,
                 video.author = author,
                 video.availableResolutions = availableResolutions,
