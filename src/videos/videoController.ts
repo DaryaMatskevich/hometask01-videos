@@ -56,15 +56,15 @@ const videoController = {
     },
 
     deleteVideoById: (req: Request, res: Response) => {
-        const video = db.videos.find(p => p.id === +req.params.id)
-        if (!video) {
-            res.sendStatus(404)
-            return;
-        } else {
-            db.videos = db.videos.filter(id => video.id !== +req.params.id)
-        res.sendStatus(204)
+        for (let i = 0; i < db.videos.length; i++) {
+            if (db.videos[i].id === +req.params.id) {
+              db.videos.splice(i, 1);
+              res.send(204)
+              return;
+            }
         }
-},
+          res.send(404)
+        },
 
 
 
