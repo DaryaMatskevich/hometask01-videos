@@ -86,10 +86,10 @@ export const minAgeRestrictionValidator = (
 export const publicationDateValidator = (
     publicationDate: string | undefined,
     errorsArray: Array<{ message: string; field: string }>) => {
+        const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
     if (publicationDate === undefined) {
         errorsArray.push({ message: "publicationDate is not defined", field: "publicationDate" })
     } else {
-       const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
         if (!dateRegex.test(publicationDate)) {
             errorsArray.push({ message: "publicationDate must be in the format 'YYYY-MM-DDTHH:MM:SS.MSZ'" , field: "publicationDate"});
         }
