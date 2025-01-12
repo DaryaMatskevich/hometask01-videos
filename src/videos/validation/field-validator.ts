@@ -20,9 +20,8 @@ export const availableResolutionsFieldValidator = (availableResolutions: Array<s
         availableResolutions.forEach((resolution: string) => {
             if (!Object.keys(ResolutionsEnum).includes(resolution)) {
                 errorsArray.push({
-                    field: "availableResolutions",
-                    message: "exist not valid value",
-                })
+                     message: "exist not valid value",
+                    field: "availableResolutions" })
                 return
             }
         })

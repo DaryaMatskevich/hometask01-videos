@@ -89,22 +89,15 @@ const videoController = {
             return
         }
 
-
         if (video) {
-            if (req.body.title) {
-                video.title = req.body.title;
-            }
-            if(req.body.author) {
-                video.author = req.body.author;
-            }
-            if (req.body.availableResolutions) {
-            video.availableResolutions = req.body.availableResolutions;}
-            if (req.body.canBeDownloaded) {
-            video.canBeDownloaded = req.body.canBeDownloaded;}
-            if(req.body.minAgeRestriction) {
-                video.minAgeRestriction = req.body.minAgeRestriction
-            }
+            video.title = title;
+            video.author = author;
+            video.availableResolutions = availableResolutions;
+            video.canBeDownloaded = canBeDownloaded;
+            video.minAgeRestriction = minAgeRestriction;
+            video.publicationDate = publicationDate;
             res.status(204)
+            return
         } 
     }
 }
