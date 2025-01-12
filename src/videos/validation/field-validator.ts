@@ -59,7 +59,7 @@ export enum ResolutionsEnum {
 export const validateCanBeDoWnlouded = (
     canBeDownloaded: boolean | undefined,
     errorsArray: Array<{ message: string; field: string }>) => {
-    if (canBeDownloaded !== undefined || canBeDownloaded !== "boolean") {
+    if (canBeDownloaded === undefined || typeof canBeDownloaded !== "boolean") {
         errorsArray.push({ message: "canBeDownloaded has not true value ", field: "canBeDownloaded" })
     }
 }
@@ -67,14 +67,14 @@ export const validateCanBeDoWnlouded = (
 export const minAgeRestrictionValidator = (
     minAgeRestriction: number | undefined | null,
     errorsArray: Array<{ message: string; field: string }>) => {
-            if (typeof minAgeRestriction === "number" && (minAgeRestriction > 18 || minAgeRestriction < 1)) {
-         errorsArray.push({ message: "minAgeRestriction must be 18 or more", field: "minAgeRestriction" })
+            if (minAgeRestriction === undefined) {
+         errorsArray.push({ message: "minAgeRestriction is not defined", field: "minAgeRestriction" })
      }
 }
 
 export const publicationDateValidator = (
     publicationDate: string | undefined,
     errorsArray: Array<{ message: string; field: string }>) => {
-          if (publicationDate !== undefined || publicationDate !== "string") {
+          if (publicationDate === undefined) {
         errorsArray.push({ message: "publicationDate is not defined", field: "publicationDate" })
 }}

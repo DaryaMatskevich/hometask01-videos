@@ -6,7 +6,13 @@ type DBType = {
 
 
 export const db: DBType = {
-    videos:[],
+    videos:[{id: 1,
+        title:"some title updated",
+           author:"some author updated",
+    availableResolutions:["P144","P2160","P720"],
+        canBeDownloaded:true,
+        minAgeRestriction:16,
+        publicationDate:"2025-01-18T09:44:14.410Z"}],
     blogs: []
 }
 
