@@ -17,7 +17,7 @@ const videoController = {
             res.status(200).json(video)
         }
         else {
-            res.status(404)
+            res.sendStatus(404)
         }
     },
 
@@ -63,50 +63,46 @@ const videoController = {
               return;
             }
         }
-          res.send(404)
+          res.sendStatus(404)
         },
+    changesVideo: (req: Request, res: Response) => {
+        const id = req.params.id;
+        let video = db.videos.find(p => p.id === +req.params.id)
+        const author = req.body.author;
+        const title = req.body.title;
+        const availableResolutions = req.body.availableResolutions;
+        const canBeDownloaded = req.body.canBeDownloaded || false;
+        const minAgeRestriction = req.body.minAgeRestriction || 18;
+        const publicationDate = req.body.publicationDate || new Date().toISOString();
 
+        const errorsArray: Array<{ field: string; message: string }> = []
+        titleFieldValidator(title, errorsArray)
+        availableResolutionsFieldValidator(availableResolutions, errorsArray)
+        authorFieldValidator(author, errorsArray)
+        validateCanBeDoWnlouded(canBeDownloaded, errorsArray)
+        minAgeRestrictionValidator(minAgeRestriction, errorsArray)
+        publicationDateValidator(publicationDate, errorsArray)
 
+        if (errorsArray.length > 0) {
+            const errors_ = errorResponse(errorsArray)
+            res.status(400).send(errors_)
+            return
+        }
 
-
-
-changesVideo: (req: Request, res: Response) => {
-    const id = req.params.id;
-    let video = db.videos.find(p => p.id === +req.params.id)
-    const author = req.body.author;
-    const title = req.body.title;
-    const availableResolutions = req.body.availableResolutions;
-    const canBeDownloaded = req.body.canBeDownloaded || false;
-    const minAgeRestriction = req.body.minAgeRestriction || 18;
-    const publicationDate = req.body.publicationDate || new Date().toISOString();
-
-    const errorsArray: Array<{ field: string; message: string }> = []
-    titleFieldValidator(title, errorsArray)
-    availableResolutionsFieldValidator(availableResolutions, errorsArray)
-    authorFieldValidator(author, errorsArray)
-    validateCanBeDoWnlouded(canBeDownloaded, errorsArray)
-    minAgeRestrictionValidator(minAgeRestriction, errorsArray)
-    publicationDateValidator(publicationDate, errorsArray)
-
-    if (errorsArray.length > 0) {
-        const errors_ = errorResponse(errorsArray)
-        res.status(400).send(errors_)
-        return
+        if (video) {
+            video.id = +id,
+                video.title = title,
+                video.author = author,
+                video.availableResolutions = availableResolutions,
+                video.canBeDownloaded = canBeDownloaded,
+                video.minAgeRestriction = minAgeRestriction,
+                video.publicationDate = publicationDate;
+            res.status(204).send()
+        } else {
+            res.status(404).send()
+        }
     }
-
-    if (video) {
-        video.id = +id,
-            video.title = title,
-            video.author = author,
-            video.availableResolutions = availableResolutions,
-            video.canBeDownloaded = canBeDownloaded,
-            video.minAgeRestriction = minAgeRestriction,
-            video.publicationDate = publicationDate;
-        res.status(204).send()
-    } else {
-        res.status(404).send()
-    }
-}}
+}
 
 
 
