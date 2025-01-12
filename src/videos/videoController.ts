@@ -30,7 +30,7 @@ const videoController = {
         titleFieldValidator(title, errorsArray)
         availableResolutionsFieldValidator(availableResolutions, errorsArray)
         authorFieldValidator(author, errorsArray)
-     
+
 
         if (errorsArray.length > 0) {
             const errors_ = errorResponse(errorsArray)
@@ -58,22 +58,25 @@ const videoController = {
     deleteVideoById: (req: Request, res: Response) => {
         const id = req.params.id;
         const videoIndex = db.videos.findIndex(video => video.id === +id);
-            if (videoIndex !== -1) {
-                db.videos.splice(videoIndex, 1)
-                res.status(204)
-            }
+        if (videoIndex !== -1) {
+            db.videos.splice(videoIndex, 1)
+            res.status(204)
+        }
         else {
-        res.status(404)
-      }},
+            res.status(404)
+        }
+    },
 
     changesVideo: (req: Request, res: Response) => {
+        const id = req.params.id;
         let video = db.videos.find(p => p.id === +req.params.id)
-        const author = req.body.author;
-        const title = req.body.title;
-        const availableResolutions = req.body.availableResolutions;
-        const canBeDownloaded = req.body.canBeDownloaded;
-        const minAgeRestriction = req.body.minAgeRestriction;
-        const publicationDate = req.body.publicationDate;
+        const { title, author, availableResolutions, canBeDownloaded, minAgeRestriction, publicationDate } = req.body;
+        // const author = req.body.author;
+        // const title = req.body.title;
+        // const availableResolutions = req.body.availableResolutions;
+        // const canBeDownloaded = req.body.canBeDownloaded;
+        // const minAgeRestriction = req.body.minAgeRestriction;
+        // const publicationDate = req.body.publicationDate;
 
         const errorsArray: Array<{ field: string; message: string }> = []
         titleFieldValidator(title, errorsArray)
@@ -90,15 +93,21 @@ const videoController = {
         }
 
         if (video) {
-            video.title = title;
-            video.author = author;
-            video.availableResolutions = availableResolutions;
-            video.canBeDownloaded = canBeDownloaded;
-            video.minAgeRestriction = minAgeRestriction;
-            video.publicationDate = publicationDate;
+            const updatedVideo = {
+                id: +id,
+                title,
+                author,
+                availableResolutions,
+                canBeDownloaded : canBeDownloaded || false,
+                minAgeRestriction : minAgeRestriction || null,
+                publicationDate : publicationDate || new Date().toISOString(),
+                createdAt: video.createdAt
+            }
+            video = updatedVideo;
+            db.videos.push(video)
             res.status(204)
-            return
-        } 
+        }
+        else { res.status(404)}
     }
 }
 

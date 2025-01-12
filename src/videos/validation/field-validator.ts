@@ -77,7 +77,7 @@ export const minAgeRestrictionValidator = (
     if (typeof minAgeRestriction !== "number") {
         errorsArray.push({ message: "minAgeRestriction must be a number", field: "minAgeRestriction" })
     }
-    // if (minAgeRestriction && minAgeRestriction !== 18) {
+    // if (minAgeRestriction && minAgeRestriction < 18) {
     //     errorsArray.push({ message: "minAgeRestriction must be 18 or more", field: "minAgeRestriction" })
     // }
 }
