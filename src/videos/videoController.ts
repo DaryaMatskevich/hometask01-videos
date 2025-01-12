@@ -56,8 +56,8 @@ const videoController = {
     },
 
     deleteVideoById: (req: Request, res: Response) => {
-        const id = req.params.id;
-        const videoIndex = db.videos.findIndex(video => video.id === +id);
+        const id = +req.params.id;
+        const videoIndex = db.videos.findIndex(video => video.id === id);
         if (videoIndex !== -1) {
             db.videos.splice(videoIndex, 1)
             res.status(204)
