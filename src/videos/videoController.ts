@@ -70,13 +70,12 @@ const videoController = {
     changesVideo: (req: Request, res: Response) => {
         const id = req.params.id;
         let video = db.videos.find(p => p.id === +req.params.id)
-        const { title, author, availableResolutions, canBeDownloaded, minAgeRestriction, publicationDate } = req.body;
-        // const author = req.body.author;
-        // const title = req.body.title;
-        // const availableResolutions = req.body.availableResolutions;
-        // const canBeDownloaded = req.body.canBeDownloaded;
-        // const minAgeRestriction = req.body.minAgeRestriction;
-        // const publicationDate = req.body.publicationDate;
+        const author = req.body.author;
+        const title = req.body.title;
+        const availableResolutions = req.body.availableResolutions;
+        const canBeDownloaded = req.body.canBeDownloaded;
+        const minAgeRestriction = req.body.minAgeRestriction;
+        const publicationDate = req.body.publicationDate;
 
         const errorsArray: Array<{ field: string; message: string }> = []
         titleFieldValidator(title, errorsArray)
@@ -93,23 +92,18 @@ const videoController = {
         }
 
         if (video) {
-            const updatedVideo = {
-                id: id,
-                title,
-                author,
-                availableResolutions,
-                canBeDownloaded : canBeDownloaded || true,
-                minAgeRestriction : minAgeRestriction || null,
-                publicationDate : publicationDate || new Date().toISOString(),
-                createdAt: video.createdAt
-            }
-            video = updatedVideo;
-            db.videos.push(video)
-            res.status(204)
-        }
-        else { res.status(404)}
-    }
-}
+                video.id = id,
+                video.title = title,
+                video.author = author,
+                video.availableResolutions = availableResolutions,
+                video.canBeDownloaded = canBeDownloaded,
+                video.minAgeRestriction =  minAgeRestriction,
+                video.publicationDate = publicationDate;
+                res.status(204)
+        } else  { 
+            res.status(404)}}}
+    
+
 
 videoRouter.get("/", videoController.getVideos);
 videoRouter.post("/", videoController.createVideo);
