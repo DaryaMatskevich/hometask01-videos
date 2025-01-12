@@ -73,7 +73,7 @@ const videoController = {
         const author = req.body.author;
         const title = req.body.title;
         const availableResolutions = req.body.availableResolutions;
-        const canBeDownloaded = req.body.canBeDownloaded;
+        const canBeDownloaded = req.body.canBeDownloaded || null;
         const minAgeRestriction = req.body.minAgeRestriction;
         const publicationDate = req.body.publicationDate;
 

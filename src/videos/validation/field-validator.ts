@@ -65,12 +65,12 @@ export const validateCanBeDoWnlouded = (
 }
 
 export const minAgeRestrictionValidator = (
-    minAgeRestriction: string | undefined | null,
+    minAgeRestriction: number | undefined,
     errorsArray: Array<{ message: string; field: string }>) => {
             if (minAgeRestriction === undefined) {
          errorsArray.push({ message: "minAgeRestriction is not defined", field: "minAgeRestriction" })
      }
-     if (typeof minAgeRestriction !== "number" || minAgeRestriction < 18) {
+     if (typeof minAgeRestriction === "number" && (minAgeRestriction > 18 || minAgeRestriction < 1)) {
         errorsArray.push({ message: "minAgeRestriction is wrong", field: "minAgeRestriction" })
     }
 }
