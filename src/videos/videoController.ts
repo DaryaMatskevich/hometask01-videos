@@ -94,11 +94,11 @@ const videoController = {
 
         if (video) {
             const updatedVideo = {
-                id: +id,
+                id: id,
                 title,
                 author,
                 availableResolutions,
-                canBeDownloaded : canBeDownloaded || false,
+                canBeDownloaded : canBeDownloaded || true,
                 minAgeRestriction : minAgeRestriction || null,
                 publicationDate : publicationDate || new Date().toISOString(),
                 createdAt: video.createdAt

@@ -59,37 +59,22 @@ export enum ResolutionsEnum {
 export const validateCanBeDoWnlouded = (
     canBeDownloaded: boolean | undefined,
     errorsArray: Array<{ message: string; field: string }>) => {
-    if (canBeDownloaded === undefined) {
-        errorsArray.push({ message: "canBeDownloaded is not defined", field: "canBeDownloaded" })
-    }
-    if (typeof canBeDownloaded !== "boolean") {
-        errorsArray.push({ message: "canBeDownloaded must be a boolean value", field: "canBeDownloaded" })
-
+    if (canBeDownloaded !== undefined || canBeDownloaded !== "boolean") {
+        errorsArray.push({ message: "canBeDownloaded has not true value ", field: "canBeDownloaded" })
     }
 }
 
 export const minAgeRestrictionValidator = (
-    minAgeRestriction: number | undefined,
+    minAgeRestriction: number | undefined | null,
     errorsArray: Array<{ message: string; field: string }>) => {
-    // if (minAgeRestriction === undefined) {
-    //     errorsArray.push({ message: "minAgeRestriction is not defined", field: "minAgeRestriction" })
-    // }
-    if (typeof minAgeRestriction !== "number") {
-        errorsArray.push({ message: "minAgeRestriction must be a number", field: "minAgeRestriction" })
-    }
-    // if (minAgeRestriction && minAgeRestriction < 18) {
-    //     errorsArray.push({ message: "minAgeRestriction must be 18 or more", field: "minAgeRestriction" })
-    // }
+            if (typeof minAgeRestriction === "number" && (minAgeRestriction > 18 || minAgeRestriction < 1)) {
+         errorsArray.push({ message: "minAgeRestriction must be 18 or more", field: "minAgeRestriction" })
+     }
 }
 
 export const publicationDateValidator = (
     publicationDate: string | undefined,
     errorsArray: Array<{ message: string; field: string }>) => {
-        const dateRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
-    if (publicationDate === undefined) {
+          if (publicationDate !== undefined || publicationDate !== "string") {
         errorsArray.push({ message: "publicationDate is not defined", field: "publicationDate" })
-    } else {
-        if (!dateRegex.test(publicationDate)) {
-            errorsArray.push({ message: "publicationDate must be in the format 'YYYY-MM-DDTHH:MM:SS.MSZ'" , field: "publicationDate"});
-        }
-    }}
+}}
