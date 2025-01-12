@@ -59,11 +59,11 @@ const videoController = {
         for (let i = 0; i < db.videos.length; i++) {
             if (db.videos[i].id === +req.params.id) {
               db.videos.splice(i, 1);
-              res.send(204)
+              res.status(204).send()
               return;
             }
           }
-          res.send(404)
+          res.status(404).send()
         },
         
         
