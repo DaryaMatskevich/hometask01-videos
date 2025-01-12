@@ -96,8 +96,8 @@ const videoController = {
                 video.title = title,
                 video.author = author,
                 video.availableResolutions = availableResolutions,
-                video.canBeDownloaded = canBeDownloaded,
-                video.minAgeRestriction =  minAgeRestriction,
+                video.canBeDownloaded = canBeDownloaded || undefined,
+                video.minAgeRestriction =  minAgeRestriction || null,
                 video.publicationDate = publicationDate;
                 res.status(204)
         } else  { 
