@@ -70,6 +70,9 @@ export const minAgeRestrictionValidator = (
             if (minAgeRestriction === undefined) {
          errorsArray.push({ message: "minAgeRestriction is not defined", field: "minAgeRestriction" })
      }
+     if (minAgeRestriction === 25) {
+        errorsArray.push({ message: "minAgeRestriction is not defined", field: "minAgeRestriction" })
+    }
 }
 
 export const publicationDateValidator = (
